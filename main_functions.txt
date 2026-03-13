@@ -1,0 +1,36 @@
+Here you can find the description of some useful function from the GMP library
+
+/* ═══════════════════════════════════════════════════════════════
+   GMP FUNCTIONS REFERENCE
+   ═══════════════════════════════════════════════════════════════
+
+   INITIALIZATION & CLEANUP
+   mpz_init(x)                   : initializes x to 0 and allocates memory
+   mpz_clear(x)                  : frees memory allocated for x — always call at the end
+
+   ASSIGNMENT
+   mpz_set_ui(x, n)              : sets x to unsigned integer n
+
+   ARITHMETIC
+   mpz_mul(ris, a, b)            : ris = a * b
+   mpz_sub_ui(ris, a, n)         : ris = a - n  (n is an unsigned integer)
+
+   MODULAR ARITHMETIC
+   mpz_mod(ris, a, m)            : ris = a mod m  (always positive)
+   mpz_invert(ris, a, m)         : ris = a^-1 mod m — returns 0 if inverse does not exist
+   mpz_powm(ris, b, e, m)        : ris = b^e mod m
+
+   NUMBER THEORY
+   mpz_gcd(ris, a, b)            : ris = GCD(a, b)
+   mpz_probab_prime_p(n, reps)   : primality test with 'reps' iterations
+                                   returns 0 (not prime), 1 (probably prime), 2 (certainly prime)
+
+   COMPARISON
+   mpz_cmp(a, b)                 : returns <0 if a<b, 0 if a==b, >0 if a>b
+   mpz_cmp_ui(a, n)              : same as mpz_cmp but compares with unsigned integer n
+
+   INPUT / OUTPUT
+   gmp_scanf("%Zd", x)           : reads a big integer from stdin into x
+   gmp_printf("%Zd", x)          : prints a big integer x  (%Zd is the format specifier for mpz_t)
+
+   ═══════════════════════════════════════════════════════════════ */
