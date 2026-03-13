@@ -53,11 +53,24 @@ void compute_rsa(){
 
 void insert_primes(mpz_t p, mpz_t q){
 
-    printf("Choose the first secret exponent (p). Insert a prime number:");
+    int risultato = 0;
+
+    do{
+    printf("\nChoose the first secret prime (p). Insert a prime number:");
     gmp_scanf("%Zd", p);
+    risultato = verify_prime(p);
+
+
+    }while(risultato == 0);
     
-    printf("Choose the first secret exponent (q). Insert a prime number:");
+
+    do{
+    printf("\nChoose the second secret prime (q). Insert a prime number:");
+        
     gmp_scanf("%Zd", q);
+    risultato = verify_prime(q);
+        
+    }while(risultato == 0);
 
 
 
@@ -96,10 +109,60 @@ void compute_totient(mpz_t t, mpz_t p, mpz_t q){
 
 }
 
+
+int verify_prime(mpz_t p){
+
+    int risultato = 0;
+
+    risultato = mpz_probab_prime_p(p, 50);
+
+    switch (risultato)
+    {
+    case 2:
+        gmp_printf("\n %Zd is certainly prime", p);
+        break;
+    case 1:
+        gmp_printf("\n%Zd is probaly prime", p);
+        break;
+    default:
+        gmp_printf("\n%Zd is not prime", p);
+        break;
+    }
+
+    return risultato;
+
+}
+
+int verify_e_exponent(mpz_t e, mpz_t t){
+
+    mpz_t var;
+    int risultato = 1;
+
+    mpz_init(var);
+
+    mpz_gcd(var,e,t);
+
+
+    if(mpz_cmp_ui(var, 1) != 0){
+       gmp_printf("\nThe chosen exponent (e) is not coprime with phi(N): %Zd", e); 
+       risultato = 0;
+    }
+
+    return risultato;
+
+    
+}
+
 void choose_e_exponent(mpz_t e, mpz_t t){
 
-    printf("Choose the public exponent (e). Insert a coprime number with phi(N):");
+    int risultato = 0;
+    do{
+    printf("\nChoose the public exponent (e). Insert a coprime number with phi(N):");
+    
     gmp_scanf("%Zd", e);
+
+    risultato = verify_e_exponent(e,t);
+    }while(risultato == 0);
 }
 
 
@@ -115,7 +178,7 @@ void compute_d_exponent(mpz_t d, mpz_t e, mpz_t t){
 
 void choose_mess(mpz_t m){
 
-    printf("Choose the message to send (m): ");
+    printf("\nChoose the message to send (m): ");
     gmp_scanf("%Zd", m);
 
 }
