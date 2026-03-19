@@ -9,7 +9,10 @@ int main() {
 
     do{
 
-        printf("What do you want to do:?");
+        printf("What do you want to do?\n");
+        printf("0-Esci\n");
+        printf("5-RSA cryptosystem\n");
+        printf("6-Solve x^e = c mod[N]\n");
         scanf("%d",&choice);
         
         switch (choice)
@@ -18,6 +21,8 @@ int main() {
             compute_rsa();
             break;
         
+        case 6:
+            break;
         default:
             break;
         }

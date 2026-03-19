@@ -31,8 +31,8 @@ void compute_rsa(){
     encrypt(mess, e, N, enc);
     decrypt(enc, d, N, dec);
 
-
-    if (mpz_cmp(mess, dec) == 0) printf("Lo scambio ha avuto successo\n");
+    if (mpz_cmp(mess, dec) == 0) printf("Lo scambio ha avuto successo.\n");
+    else printf("Problema!!!\n");
 
 
 
@@ -81,7 +81,7 @@ void compute_modulo(mpz_t N, mpz_t p, mpz_t q){
 
     mpz_mul(N, p, q);
 
-    gmp_printf("N is: %Zd\n", N);
+    gmp_printf("\nN = %Zd", N);
 
     return;
 
@@ -100,7 +100,7 @@ void compute_totient(mpz_t t, mpz_t p, mpz_t q){
 
     mpz_mul(t, var1, var2);
 
-    gmp_printf("t = : %Zd\n", t);
+    gmp_printf("\nphi(N) =  %Zd\n", t);
 
     mpz_clear(var1);
     mpz_clear(var2);
@@ -119,13 +119,13 @@ int verify_prime(mpz_t p){
     switch (risultato)
     {
     case 2:
-        gmp_printf("\n %Zd is certainly prime", p);
+        gmp_printf("%Zd is certainly prime", p);
         break;
     case 1:
-        gmp_printf("\n%Zd is probaly prime", p);
+        gmp_printf("%Zd is probably prime", p);
         break;
     default:
-        gmp_printf("\n%Zd is not prime", p);
+        gmp_printf("%Zd is not prime", p);
         break;
     }
 
@@ -144,7 +144,7 @@ int verify_e_exponent(mpz_t e, mpz_t t){
 
 
     if(mpz_cmp_ui(var, 1) != 0){
-       gmp_printf("\nThe chosen exponent (e) is not coprime with phi(N): %Zd", e); 
+       gmp_printf("The chosen exponent (e) is not coprime with phi(N)\n"); 
        risultato = 0;
     }
 
@@ -171,14 +171,14 @@ void compute_d_exponent(mpz_t d, mpz_t e, mpz_t t){
     mpz_invert(d,e,t);
 
     
-    gmp_printf("d = : %Zd\n", d);
+    gmp_printf("The inverse of e is %Zd\n", d);
 
 
 }
 
 void choose_mess(mpz_t m){
 
-    printf("\nChoose the message to send (m): ");
+    printf("Choose the message to send (m): ");
     gmp_scanf("%Zd", m);
 
 }
